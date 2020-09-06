@@ -1,3 +1,5 @@
+// Больница с докторами и пациентами
+
 var Patient = {
     surname: "Burmistrov",
     name: "Ivan",
@@ -45,12 +47,16 @@ var Hospital = {
     },
     ChiefPhysician: ChiefPhysician,
 };
+
+// Подсчет времени до приема врача.
+
 var WDoc1T =
     (Hospital.Doctor1.queuePerson * Hospital.Doctor1.DPA) /
     (Hospital.Doctor1.WorkingHours - Hospital.Doctor1.Break);
 var WDoc2T =
     (Hospital.Doctor2.queuePerson * Hospital.Doctor2.DPA) /
     (Hospital.Doctor2.WorkingHours - Hospital.Doctor2.Break);
+
 console.log(
     "В больнице есть два терапевта - " +
         Hospital.Doctor1.surname +
