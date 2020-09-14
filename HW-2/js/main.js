@@ -179,11 +179,14 @@
 // // Задание 10
 
 // function random() {
-//     var i = 0;
-//     while (Math.random() < 0.9) {
+//     var i = 1;
+//     while (true) {
+//         if (Math.random() > 0.9) {
+//             alert(i);
+//             break;
+//         }
 //         i++;
 //         continue;
 //     }
-//     alert(i);
 // }
 // random();
