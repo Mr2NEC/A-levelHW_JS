@@ -1,4 +1,4 @@
-function arrPersons() {
+function createArrPersons() {
     //Задание 1
     var persons = [
         {
@@ -62,4 +62,50 @@ function arrPersons() {
     str += "</table>";
     document.write(str);
 }
-arrPersons();
+createArrPersons();
+
+//Задание 8
+
+function avg2(a = 1, b = 1) {
+    return (a + b) / 2;
+}
+console.log(avg2(5, 6));
+
+//Задание 9
+
+function sum3(a = 0, b = 0, c = 0) {
+    return a + b + c;
+}
+console.log(sum3(5, 6));
+
+//Задание 10
+
+function intRandom(a, b) {
+    return Math.floor(Math.random() * (b - a + 1)) + a;
+}
+var a;
+var b;
+function enterNumbers() {
+    function enterA() {
+        var aCustom = prompt("Введите число a", "0");
+        a = parseInt(aCustom);
+        if (isNaN(a)) {
+            alert("Число введено не верно!");
+            enterA();
+        }
+    }
+    enterA();
+    function enterB() {
+        var bCustom = prompt("Введите число b", "1");
+        b = parseInt(bCustom);
+        if (b <= a) {
+            alert("Введеное число должно быть больше a!");
+            enterB();
+        } else if (isNaN(b)) {
+            b = a;
+            console.log(intRandom(0, (b = a)));
+        } else console.log(intRandom(a, b));
+    }
+    enterB();
+}
+enterNumbers();
