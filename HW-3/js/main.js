@@ -2,20 +2,20 @@ function createArrPersons() {
     //Задание 1
     var persons = [
         {
-            name: "Ivan",
-            surname: "Ivanov",
-            fatherName: "Ivanovich",
+            name: 'Ivan',
+            surname: 'Ivanov',
+            fatherName: 'Ivanovich',
         },
     ];
     var person1 = {
-        name: "Oleg",
-        surname: "Olegov",
-        fatherName: "Olegovich",
+        name: 'Oleg',
+        surname: 'Olegov',
+        fatherName: 'Olegovich',
     };
     var person2 = {
-        name: "Nikolay",
-        surname: "Nikolaev",
-        fatherName: "Nikolaevich",
+        name: 'Nikolay',
+        surname: 'Nikolaev',
+        fatherName: 'Nikolaevich',
     };
 
     persons.push(person1, person2);
@@ -36,7 +36,7 @@ function createArrPersons() {
     //Задание 4
 
     for (var i = 0; i < persons.length; i++) {
-        persons[i]["fullName"] = `${persons[i].name} ${persons[i].fatherName}`;
+        persons[i]['fullName'] = `${persons[i].name} ${persons[i].fatherName}`;
         console.log(persons[i]);
     }
 
@@ -59,7 +59,7 @@ function createArrPersons() {
     for (let i = 0; i < persons.length; i++) {
         str += `<tr><td>${persons[i].name}</td><td>${persons[i].surname}</td><td>${persons[i].fatherName}</td><td>${persons[i].fullName}</td></tr>`;
     }
-    str += "</table>";
+    str += '</table>';
     document.write(str);
 }
 createArrPersons();
@@ -80,32 +80,32 @@ console.log(sum3(5, 6));
 
 //Задание 10
 
-function intRandom(a, b) {
-    return Math.floor(Math.random() * (b - a + 1)) + a;
+function enterNumber(text) {
+    var numberCustom = prompt(`Введите ${text} число `, '0');
+    number = parseInt(numberCustom);
+    return number;
 }
-var a;
-var b;
-function enterNumbers() {
-    function enterA() {
-        var aCustom = prompt("Введите число a", "0");
-        a = parseInt(aCustom);
-        if (isNaN(a)) {
-            alert("Число введено не верно!");
-            enterA();
+
+function genRndInt(min, max) {
+    if (isNaN(max) && min > 0) {
+        max = min;
+        min = 0;
+    }
+
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function intRandom() {
+    var minNumber, maxNumber;
+    do {
+        minNumber = enterNumber('минимальное');
+        maxNumber = enterNumber('максимальное');
+        if (minNumber > maxNumber) {
+            alert(`Максимальное число должно быть больше ${minNumber}!`);
         }
-    }
-    enterA();
-    function enterB() {
-        var bCustom = prompt("Введите число b", "1");
-        b = parseInt(bCustom);
-        if (b <= a) {
-            alert("Введеное число должно быть больше a!");
-            enterB();
-        } else if (isNaN(b)) {
-            b = a;
-            console.log(intRandom(0, (b = a)));
-        } else console.log(intRandom(a, b));
-    }
-    enterB();
+    } while (minNumber > maxNumber);
+
+    var rndInt = genRndInt(minNumber, maxNumber);
+    console.log(`Random integer is ${rndInt}`);
 }
-enterNumbers();
+intRandom();
