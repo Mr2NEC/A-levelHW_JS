@@ -87,6 +87,10 @@ function enterNumber(text) {
 }
 
 function genRndInt(min, max) {
+    if (isNaN(min) && isNaN(max)) {
+        min = 0;
+        max = 1;
+    }
     if (isNaN(max) || max === null) {
         max = 0;
     }
@@ -110,6 +114,6 @@ function intRandom() {
     } while (minNumber > maxNumber);
 
     var rndInt = genRndInt(minNumber, maxNumber);
-    console.log(`Random integer is ${rndInt}`);
+    console.log(`Случайное число ${rndInt}`);
 }
 intRandom();
