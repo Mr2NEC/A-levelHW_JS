@@ -2,20 +2,20 @@ function createArrPersons() {
     //Задание 1
     var persons = [
         {
-            name: "Ivan",
-            surname: "Ivanov",
-            fatherName: "Ivanovich",
+            name: 'Ivan',
+            surname: 'Ivanov',
+            fatherName: 'Ivanovich',
         },
     ];
     var person1 = {
-        name: "Oleg",
-        surname: "Olegov",
-        fatherName: "Olegovich",
+        name: 'Oleg',
+        surname: 'Olegov',
+        fatherName: 'Olegovich',
     };
     var person2 = {
-        name: "Nikolay",
-        surname: "Nikolaev",
-        fatherName: "Nikolaevich",
+        name: 'Nikolay',
+        surname: 'Nikolaev',
+        fatherName: 'Nikolaevich',
     };
 
     persons.push(person1, person2);
@@ -36,7 +36,7 @@ function createArrPersons() {
     //Задание 4
 
     for (var i = 0; i < persons.length; i++) {
-        persons[i]["fullName"] = `${persons[i].name} ${persons[i].fatherName}`;
+        persons[i]['fullName'] = `${persons[i].name} ${persons[i].fatherName}`;
         console.log(persons[i]);
     }
 
@@ -59,7 +59,7 @@ function createArrPersons() {
     for (let i = 0; i < persons.length; i++) {
         str += `<tr><td>${persons[i].name}</td><td>${persons[i].surname}</td><td>${persons[i].fatherName}</td><td>${persons[i].fullName}</td></tr>`;
     }
-    str += "</table>";
+    str += '</table>';
     document.write(str);
 }
 createArrPersons();
@@ -81,7 +81,7 @@ console.log(sum3(5, 6));
 //Задание 10
 
 function enterNumber(text) {
-    var numberCustom = prompt(`Введите ${text} число `, "0");
+    var numberCustom = prompt(`Введите ${text} число `, '0');
     number = parseInt(numberCustom);
     return number;
 }
@@ -106,8 +106,8 @@ function genRndInt(min, max) {
 function intRandom() {
     var minNumber, maxNumber;
     do {
-        minNumber = enterNumber("минимальное");
-        maxNumber = enterNumber("максимальное");
+        minNumber = enterNumber('минимальное');
+        maxNumber = enterNumber('максимальное');
         if (minNumber > maxNumber) {
             alert(`Максимальное число должно быть больше ${minNumber}!`);
         }
