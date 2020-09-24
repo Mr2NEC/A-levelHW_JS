@@ -1,37 +1,39 @@
 // task 1
-function getImgSrcAndImgRotate() {
-    let srcImg = prompt('Укажите ссылку на картинку', '');
-    // let rotateImg = prompt('Укажите градус поворота картинки', '');
-    function validateImgSrc(vSrcImg) {
-        let http = 'http://';
-        let https = 'https://';
-        let splits = vSrcImg.split('');
-        for (let i = 0; i < http.length; i++) {
-            if (splits[i] === http[i]) {
-            } else if ((http = https)) {
-                if (splits[i] !== https[i]) {
-                    getImgSrcAndImgRotate(alert('Это не ссылка!'));
-                }
-            }
-        }
-        for (let i = 0; i < splits.length; i++) {
-            if (splits[i] === ' ') {
-                getImgSrcAndImgRotate(alert('Удалите пробел с ссылки!'));
-            }
-        }
-        if (splits.length <= 15) {
-            getImgSrcAndImgRotate(alert('Это не ссылка!'));
+function getAndRotate() {
+    let ImgSrc;
+    let ImgRotate;
+    function getValidateImgSrc() {
+        let clientSrcImg = prompt('Введите ссылку на картинку', '');
+
+        let re1 = /^(https?:\/\/)+([^\s]+(?=\.(jpg|gif|png))\.\2)/;
+        let re2 = /\s/;
+
+        if (re1.test(clientSrcImg) === false) {
+            return false;
         } else {
-            return addImgSrc();
-        }
-        function addImgSrc() {
-            let ImgSrc = document.querySelector('#myimg');
-            ImgSrc.setAttribute('src', vSrcImg);
-            console.log(ImgSrc);
+            if (re2.test(clientSrcImg) !== false) {
+                return false;
+            } else return clientSrcImg;
         }
     }
-    function validateImgRotate(vRotateImg) {}
-    validateImgSrc(srcImg);
-    // validateImgRotate(rotateImg);
+
+    do {
+        ImgSrc = getValidateImgSrc();
+    } while (ImgSrc === false);
+
+    function getValidateImgRotate() {
+        let clientRotateImg = prompt('Введите градус поворота картинки', '');
+        let parse = parseInt(clientRotateImg);
+        if (isNaN(parse)) {
+            return false;
+        } else return parse;
+    }
+
+    do {
+        ImgRotate = getValidateImgRotate();
+    } while (ImgRotate === false);
+
+    let getImgSrc = document.querySelector('#myimg');
+    getImgSrc.setAttribute('src', ImgSrc);
 }
-getImgSrcAndImgRotate();
+getAndRotate();
