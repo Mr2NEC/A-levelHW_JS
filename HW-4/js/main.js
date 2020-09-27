@@ -5,7 +5,10 @@ function task_1() {
     let ImgRotate;
 
     function getAndValidateImgSrc() {
-        let clientSrcImg = prompt("Введите ссылку на картинку", "");
+        let clientSrcImg = prompt(
+            "Введите ссылку на картинку",
+            "https://www.computerhope.com/jargon/r/random-dice.jpg"
+        );
 
         let re1 = /^(https?:\/\/)+([^\s]+(?=\.(jpg|gif|png))\.\2)/;
         let re2 = /\s/;
@@ -24,7 +27,7 @@ function task_1() {
     } while (ImgSrc === false);
 
     function getAndValidateImgRotate() {
-        let clientRotateImg = prompt("Введите градус поворота картинки", "");
+        let clientRotateImg = prompt("Введите градус поворота картинки", "45");
         let parse = parseInt(clientRotateImg);
         if (isNaN(parse)) {
             return false;
@@ -62,7 +65,7 @@ task_1();
 
 function task_2() {
     function getTagId() {
-        let castomTagId = prompt("Введите id тега", "");
+        let castomTagId = prompt("Введите id тега", "myimg");
         return castomTagId;
     }
 
@@ -291,3 +294,67 @@ function task_8() {
     console.log(newArray);
 }
 task_8();
+
+// task 9
+
+function task_9() {
+    let someTree = {
+        tagName: "table",
+        children: [
+            {
+                tagName: "tr",
+                children: [
+                    {
+                        tagName: "td",
+                        text: "some text",
+                    },
+                    {
+                        tagName: "td",
+                        text: "some text 2",
+                    },
+                ],
+            },
+        ],
+        attrs: {
+            border: 1,
+        },
+    };
+
+    function createDomElements(obj, mainElem) {
+        let newTagName;
+
+        function createElem() {
+            for (let j in obj) {
+                let objParam = obj[j];
+                if (j === "tagName") {
+                    let createTagName = document.createElement(objParam);
+                    mainElem.appendChild(createTagName);
+                    newTagName = document.querySelector(objParam);
+                } else if (newTagName !== undefined && j === "attrs") {
+                    for (let i in objParam) {
+                        mainElem.lastChild.setAttribute(i, objParam[i]);
+                    }
+                } else if (newTagName !== undefined && j === "text") {
+                    mainElem.lastChild.innerText = objParam;
+                }
+            }
+            getChildren();
+
+            function getChildren() {
+                for (let j in obj) {
+                    if (j === "children") {
+                        let arr = obj[j];
+                        mainElem = newTagName;
+                        for (let i of arr) {
+                            obj = i;
+                            createElem();
+                        }
+                    }
+                }
+            }
+        }
+        createElem();
+    }
+    createDomElements(someTree, document.querySelector("#footer"));
+}
+task_9();
