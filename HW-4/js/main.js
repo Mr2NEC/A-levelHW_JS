@@ -116,30 +116,17 @@ task_3();
 // task 4
 
 function task_4() {
-    let nullElem = null;
-
-    let tableElem = document.querySelector("table");
-
-    tableElem.onmouseover = function (event) {
-        if (nullElem) return;
-        let target = event.target.closest("td");
-        if (!target) return;
-        if (!tableElem.contains(target)) return;
-        nullElem = target;
-        target.style.background = "#3366CC";
-    };
-
-    tableElem.onmouseout = function (event) {
-        if (!nullElem) return;
-        let relatedTarget = event.relatedTarget;
-        while (relatedTarget) {
-            if (relatedTarget == nullElem) return;
-
-            relatedTarget = relatedTarget.parentNode;
-        }
-        nullElem.style.background = "";
-        nullElem = null;
-    };
+    let td = document.querySelectorAll("td");
+    for (let i of td) {
+        i.onmouseover = function (event) {
+            let target = event.target;
+            target.style.background = "blue";
+        };
+        i.onmouseout = function (event) {
+            let target = event.target;
+            target.style.background = "";
+        };
+    }
 }
 task_4();
 
