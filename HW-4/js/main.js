@@ -6,8 +6,8 @@ function task_1() {
 
     function getAndValidateImgSrc() {
         let clientSrcImg = prompt(
-            "Введите ссылку на картинку",
-            "https://www.computerhope.com/jargon/r/random-dice.jpg"
+            'Введите ссылку на картинку',
+            'https://www.computerhope.com/jargon/r/random-dice.jpg'
         );
 
         let re1 = /^(https?:\/\/)+([^\s]+(?=\.(jpg|gif|png))\.\2)/;
@@ -27,7 +27,7 @@ function task_1() {
     } while (ImgSrc === false);
 
     function getAndValidateImgRotate() {
-        let clientRotateImg = prompt("Введите градус поворота картинки", "45");
+        let clientRotateImg = prompt('Введите градус поворота картинки', '45');
         let parse = parseInt(clientRotateImg);
         if (isNaN(parse)) {
             return false;
@@ -38,14 +38,14 @@ function task_1() {
         ImgRotate = getAndValidateImgRotate();
     } while (ImgRotate === false);
 
-    let ImgSrcHtml = document.querySelector("#myimg");
-    ImgSrcHtml.setAttribute("src", ImgSrc);
+    let ImgSrcHtml = document.querySelector('#myimg');
+    ImgSrcHtml.setAttribute('src', ImgSrc);
 
     function addElement() {
-        let mainElem = document.querySelector("#main");
-        let imgElem = document.createElement("img");
+        let mainElem = document.querySelector('#main');
+        let imgElem = document.createElement('img');
         imgElem.src = ImgSrc;
-        imgElem.alt = "";
+        imgElem.alt = '';
         imgElem.style.cssText = `transform:rotate(${ImgRotate}deg); width: 100px`;
         mainElem.appendChild(imgElem);
     }
@@ -65,18 +65,18 @@ task_1();
 
 function task_2() {
     function getTagId() {
-        let castomTagId = prompt("Введите id тега", "myimg");
+        let castomTagId = prompt('Введите id тега', 'myimg');
         return castomTagId;
     }
 
     let tagId = getTagId();
 
     function deleteTag(fTagId) {
-        let TagIdHtml = document.querySelector("#" + fTagId);
+        let TagIdHtml = document.querySelector('#' + fTagId);
         TagIdHtml !== null
             ? TagIdHtml.remove()
             : alert(
-                  "Нельзя удалить этот тег, потому что в вёрстке этого тега нету."
+                  'Нельзя удалить этот тег, потому что в вёрстке этого тега нету.'
               );
     }
     deleteTag(tagId);
@@ -87,23 +87,23 @@ task_2();
 
 function task_3() {
     function createTable(content) {
-        let mainElem = document.querySelector("#main");
-        let tableElem = document.createElement("table");
+        let mainElem = document.querySelector('#main');
+        let tableElem = document.createElement('table');
         mainElem.appendChild(tableElem);
         content();
     }
 
     function writeInTable() {
-        let tableElem = document.querySelector("table");
+        let tableElem = document.querySelector('table');
         for (let i = 1; i < 10; i++) {
-            let trElem = document.createElement("tr");
+            let trElem = document.createElement('tr');
             trElem.id = `tr${i}`;
             tableElem.appendChild(trElem);
 
             for (let j = 1; j < 10; j++) {
-                let trid = document.querySelector("#tr" + i);
-                let tdElem = document.createElement("td");
-                tdElem.style = "border: 1px solid black; padding: 5px;";
+                let trid = document.querySelector('#tr' + i);
+                let tdElem = document.createElement('td');
+                tdElem.style = 'border: 1px solid black; padding: 5px;';
                 tdElem.innerText = `${j} * ${i} = ${i * j}`;
                 trid.appendChild(tdElem);
             }
@@ -118,15 +118,15 @@ task_3();
 function task_4() {
     let nullElem = null;
 
-    let tableElem = document.querySelector("table");
+    let tableElem = document.querySelector('table');
 
     tableElem.onmouseover = function (event) {
         if (nullElem) return;
-        let target = event.target.closest("td");
+        let target = event.target.closest('td');
         if (!target) return;
         if (!tableElem.contains(target)) return;
         nullElem = target;
-        target.style.background = "#3366CC";
+        target.style.background = '#3366CC';
     };
 
     tableElem.onmouseout = function (event) {
@@ -137,7 +137,7 @@ function task_4() {
 
             relatedTarget = relatedTarget.parentNode;
         }
-        nullElem.style.background = "";
+        nullElem.style.background = '';
         nullElem = null;
     };
 }
@@ -146,23 +146,23 @@ task_4();
 // task 5
 
 function task_5() {
-    let mainElem = document.querySelector("#main");
+    let mainElem = document.querySelector('#main');
 
     function createInput() {
-        let createInputElem = document.createElement("input");
-        createInputElem.type = "number";
+        let createInputElem = document.createElement('input');
+        createInputElem.type = 'number';
         mainElem.appendChild(createInputElem);
     }
 
     function createButton() {
-        let createButtonElem = document.createElement("button");
-        createButtonElem.type = "submit";
-        createButtonElem.innerText = "Submit";
+        let createButtonElem = document.createElement('button');
+        createButtonElem.type = 'submit';
+        createButtonElem.innerText = 'Submit';
         mainElem.appendChild(createButtonElem);
     }
     function createDiv() {
-        let createDivElem = document.createElement("div");
-        createDivElem.id = "result";
+        let createDivElem = document.createElement('div');
+        createDivElem.id = 'result';
         mainElem.appendChild(createDivElem);
     }
 
@@ -176,7 +176,7 @@ function task_5() {
     createDiv();
 
     function getInputValueSum() {
-        let input = document.querySelectorAll("input");
+        let input = document.querySelectorAll('input');
         let valueSum = null;
         for (let i of input) {
             valueSum += parseInt(i.value);
@@ -184,14 +184,14 @@ function task_5() {
         return valueSum;
     }
 
-    let btn = document.querySelector("button");
+    let btn = document.querySelector('button');
     btn.onclick = function () {
         let result = getInputValueSum();
-        let div = document.querySelector("#result");
+        let div = document.querySelector('#result');
         if (!isNaN(result)) {
             div.innerText = result;
         } else {
-            div.innerText = "Введите корректные данные.";
+            div.innerText = 'Введите корректные данные.';
         }
     };
 }
@@ -202,21 +202,21 @@ task_5();
 function task_6() {
     let persons = [
         {
-            name: "Vasyan",
+            name: 'Vasyan',
             age: 21,
         },
         {
-            name: "Kolyan",
+            name: 'Kolyan',
             age: 22,
         },
         {
-            name: "Mashka",
+            name: 'Mashka',
             age: 17,
         },
     ];
 
     function personsSortBy(stringNameOrAge) {
-        if (stringNameOrAge === "name") {
+        if (stringNameOrAge === 'name') {
             persons.sort(function (a, b) {
                 if (a.name > b.name) {
                     return 1;
@@ -226,15 +226,15 @@ function task_6() {
                 }
                 return 0;
             });
-        } else if (stringNameOrAge === "age") {
+        } else if (stringNameOrAge === 'age') {
             persons.sort(function (a, b) {
                 return a.age - b.age;
             });
         } else {
-            alert("Параметр задан неверно!");
+            alert('Параметр задан неверно!');
         }
     }
-    personsSortBy("age");
+    personsSortBy('age');
 
     console.log(persons);
 }
@@ -244,14 +244,14 @@ task_6();
 
 function task_7() {
     let myArray = [
-        " hello darkness   my old   friend ",
+        ' hello darkness   my old   friend ',
         " i've come to   talk  with   you again    ",
     ];
     function validateSpaces(Arr) {
         let validArray = Arr.map(function (str) {
             let re = /\s\s/;
             do {
-                str = str.replace(re, " ");
+                str = str.replace(re, ' ');
             } while (re.test(str) === true);
             return str;
         });
@@ -299,18 +299,18 @@ task_8();
 
 function task_9() {
     let someTree = {
-        tagName: "table",
+        tagName: 'table',
         children: [
             {
-                tagName: "tr",
+                tagName: 'tr',
                 children: [
                     {
-                        tagName: "td",
-                        text: "some text",
+                        tagName: 'td',
+                        text: 'some text',
                     },
                     {
-                        tagName: "td",
-                        text: "some text 2",
+                        tagName: 'td',
+                        text: 'some text 2',
                     },
                 ],
             },
@@ -320,41 +320,40 @@ function task_9() {
         },
     };
 
-    function createDomElements(obj, mainElem) {
-        let newTagName;
+    function getElem(someTreeObj) {
+        let someTreeTagName = someTreeObj.tagName;
+        let someTreeAttrs = someTreeObj.attrs;
+        let someTreeText = someTreeObj.text;
+        let newsomeTree = createElem(
+            someTreeTagName,
+            someTreeAttrs,
+            someTreeText
+        );
+        if (someTreeObj.children !== undefined) {
+            someTreeObj.children.forEach(function (element) {
+                element = getElem(element);
+                newsomeTree.appendChild(element);
+            });
+        }
+        return newsomeTree;
+    }
 
-        function createElem() {
-            for (let j in obj) {
-                let objParam = obj[j];
-                if (j === "tagName") {
-                    let createTagName = document.createElement(objParam);
-                    mainElem.appendChild(createTagName);
-                    newTagName = document.querySelector(objParam);
-                } else if (newTagName !== undefined && j === "attrs") {
-                    for (let i in objParam) {
-                        mainElem.lastChild.setAttribute(i, objParam[i]);
-                    }
-                } else if (newTagName !== undefined && j === "text") {
-                    mainElem.lastChild.innerText = objParam;
-                }
-            }
-            getChildren();
+    let addElem = getElem(someTree);
+    let mainElem = document.querySelector('#main');
+    mainElem.appendChild(addElem);
 
-            function getChildren() {
-                for (let j in obj) {
-                    if (j === "children") {
-                        let arr = obj[j];
-                        mainElem = newTagName;
-                        for (let i of arr) {
-                            obj = i;
-                            createElem();
-                        }
-                    }
-                }
+    function createElem(tagName, attrs, text) {
+        let tagNameElem = document.createElement(tagName);
+
+        if (tagNameElem !== undefined && attrs !== undefined) {
+            for (attr in attrs) {
+                tagNameElem.setAttribute(attr, attrs[attr]);
             }
         }
-        createElem();
+        if (tagNameElem !== undefined && text !== undefined) {
+            tagNameElem.innerText = text;
+        }
+        return tagNameElem;
     }
-    createDomElements(someTree, document.querySelector("#footer"));
 }
 task_9();
