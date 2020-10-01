@@ -29,39 +29,43 @@ function task_1() {
         return circle;
     }
 
-    let circles = document.querySelectorAll('.circleStyle');
-    let score = 0;
-    let timer = false;
+    function playGame() {
+        let circles = document.querySelectorAll('.circleStyle');
 
-    function gameOver() {
-        alert(`Game Over, You got ${score} points `);
-        timer = false;
-        score = 0;
+        let score = 0;
+        let timer = false;
+
+        for (let circle of circles) {
+            circle.addEventListener('click', function (event) {
+                if (this.style.width === '40px') {
+                    score += 10;
+                } else if (this.style.width === '80px') {
+                    score += 8;
+                } else if (this.style.width === '160px') {
+                    score += 5;
+                } else if (this.style.width === '320px') {
+                    score += 2;
+                }
+
+                event.stopPropagation
+                    ? event.stopPropagation()
+                    : (event.cancelBubble = true);
+            });
+
+            circle.addEventListener('click', function (event) {
+                if (timer === false) {
+                    timer = true;
+                    setTimeout(gameOver, 30000);
+                }
+            });
+        }
+
+        function gameOver() {
+            alert(`The game is over, you score ${score} points.`);
+            timer = false;
+            score = 0;
+        }
     }
-
-    for (let circle of circles) {
-        circle.addEventListener('click', function (event) {
-            if (this.style.width === '40px') {
-                score += 10;
-            } else if (this.style.width === '80px') {
-                score += 8;
-            } else if (this.style.width === '160px') {
-                score += 5;
-            } else if (this.style.width === '320px') {
-                score += 2;
-            }
-
-            event.stopPropagation
-                ? event.stopPropagation()
-                : (event.cancelBubble = true);
-        });
-
-        circle.addEventListener('click', function (event) {
-            if (timer === false) {
-                timer = true;
-                setTimeout(gameOver, 30000);
-            }
-        });
-    }
+    playGame();
 }
 task_1();
