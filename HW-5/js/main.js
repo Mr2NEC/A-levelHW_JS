@@ -69,3 +69,42 @@ function task_1() {
     playGame();
 }
 task_1();
+
+// task_2
+
+function task_2() {
+    function makeProfileTimer() {
+        const START = new Date().getTime();
+        alert('Замеряем время работы этого alert');
+        const END = new Date().getTime();
+        return function () {
+            return `SecondWay: ${END - START}ms`;
+        };
+    }
+    let timer = makeProfileTimer();
+    alert(timer());
+}
+task_2();
+
+// task_3
+
+function task_3() {
+    let result = countDown();
+    function countDown() {
+        let i = 5;
+        return function () {
+            if (i >= 0) {
+                console.log(i--);
+                setTimeout(result, 1000);
+            } else {
+                console.log('GO!');
+            }
+        };
+    }
+    result();
+}
+task_3();
+
+// task_4
+
+function task_4() {}
