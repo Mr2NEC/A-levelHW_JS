@@ -107,4 +107,18 @@ task_3();
 
 // task_4
 
-function task_4() {}
+function task_4() {
+    function myBind(func, context, ...rest) {
+        return function (...args) {
+            let id = Date.now().toString();
+
+            context[id] = func;
+            let result = context[id](...rest.concat(args));
+
+            delete context[id];
+
+            return result;
+        };
+    }
+}
+task_4();
