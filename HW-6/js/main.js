@@ -1,44 +1,49 @@
+let wrapperElem = document.querySelector("#wrapper");
+
+let bodyMassege = document.createElement("div");
+bodyMassege.style.cssText =
+    "width: 500px; padding: 10px; background: #00FFFF; display: flex; align-items: center; flex-direction: column; color: white";
+bodyMassege.id = "bodyMassege";
+wrapperElem.appendChild(bodyMassege);
+
 let SomePosts = function getSomePosts() {
-    let url = 'https://jsonplaceholder.typicode.com/posts/';
+    let url = "https://jsonplaceholder.typicode.com/posts/";
     return function (index) {
         if (isNaN(index)) {
-            index = '';
+            index = "";
         }
 
         fetch(url + index)
             .then((response) => response.json())
-            .then((json) => createMassegeElem(json))
-            .then(() => createButtonElem());
+            .then((json) => getMassegeElem(json));
     };
 };
 
-SomePosts()(2);
+SomePosts()(1);
 
-let wrapperElem = document.querySelector('#wrapper');
-
-function createMassegeElem(json) {
+function getMassegeElem(json) {
     console.log(json);
-    let bodyMassege = document.createElement('div');
-    bodyMassege.style.cssText =
-        'width: 500px; padding: 10px; background: #00FFFF; display: flex; align-items: center; flex-direction: column; color: white';
-    wrapperElem.appendChild(bodyMassege);
-    let massegeTitle = document.createElement('div');
-    massegeTitle.style.cssText =
-        'width: 400px; border: 2px solid white; margin: 10px; padding: 10px; background: #00AAFF;';
-    massegeTitle.innerText = json.title;
-    bodyMassege.appendChild(massegeTitle);
-    let massegeBody = document.createElement('div');
-    massegeBody.style.cssText =
-        'width: 400px; border: 2px solid white; margin: 10px; padding: 10px; background: #00AAFF;';
-    massegeBody.innerText = json.body;
-    bodyMassege.appendChild(massegeBody);
+    for (i in json) {
+        if (i === "title" || i === "body") {
+            createElem(json[i]);
+        }
+    }
+}
+
+function createElem(text) {
+    let massege = document.createElement("div");
+    massege.style.cssText =
+        "width: 400px; border: 2px solid white; margin: 10px; padding: 10px; background: #00AAFF;";
+    massege.innerText = text;
+    bodyMassege.appendChild(massege);
 }
 
 function createButtonElem() {
-    let buttonElem = document.createElement('button');
+    let buttonElem = document.createElement("button");
 
-    buttonElem.style.cssText = 'width: 100px; height: 50px; margin-top: 20px;';
-    buttonElem.innerText = 'getData';
+    buttonElem.style.cssText = "width: 100px; height: 50px; margin-top: 20px;";
+    buttonElem.innerText = "getData";
 
     wrapperElem.appendChild(buttonElem);
 }
+createButtonElem();
