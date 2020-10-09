@@ -6,25 +6,29 @@ bodyMassege.style.cssText =
 bodyMassege.id = "bodyMassege";
 wrapperElem.appendChild(bodyMassege);
 
-function createbuttonElem() {
-    let buttonElem = document.createElement("button");
+let timer = true;
 
-    buttonElem.style.cssText = "width: 100px; height: 50px; margin-top: 20px;";
-    buttonElem.innerText = "getData";
+let counter = countFu();
 
-    wrapperElem.appendChild(buttonElem);
+function countFu () {
+    let i = 0;
+        return function () {
+            i++;
+        };
+};
 
-    buttonElem.addEventListener("click", () => {
-        Promise.all([someGet(), somePost(), somePut(), somePatch()]);
-    });
-}
-createbuttonElem();
+console.log(counter());
 
 let someGet = function () {
     fetch("https://jsonplaceholder.typicode.com/posts/1")
         .then((response) => response.json())
-        .then((json) => getMassegeElem(json));
+        .then((json) => getMassegeElem(json))
+        .catch((e) => {
+            console.log('Error: ' + e.message);
+            console.log(e.response);
+        });
 };
+someGet();
 
 function getMassegeElem(json) {
     console.log(json);
@@ -59,6 +63,7 @@ let somePost = function () {
         .then((response) => response.json())
         .then((json) => console.log(json));
 };
+somePost();
 
 let somePut = function () {
     fetch("https://jsonplaceholder.typicode.com/posts/1", {
@@ -77,6 +82,7 @@ let somePut = function () {
         .then((response) => response.json())
         .then((json) => console.log(json));
 };
+somePut();
 
 let somePatch = function () {
     fetch("https://jsonplaceholder.typicode.com/posts/1", {
@@ -91,3 +97,31 @@ let somePatch = function () {
         .then((response) => response.json())
         .then((json) => console.log(json));
 };
+somePatch();
+
+let someDelete = function () {
+    fetch('https://jsonplaceholder.typicode.com/posts/100', {
+        method: 'DELETE',
+    })
+}
+someDelete()
+
+function createbuttonElem() {
+    let buttonElem = document.createElement("button");
+
+    buttonElem.style.cssText = "width: 100px; height: 50px; margin-top: 20px;";
+    buttonElem.innerText = "getData";
+
+    wrapperElem.appendChild(buttonElem);
+
+    buttonElem.addEventListener("click", () => {
+        if (timer === true) {
+            someGet()
+            timer = false
+            setTimeout( () => {
+                timer = true
+            }, 3 * 1000)
+        }
+    });
+}
+createbuttonElem();
