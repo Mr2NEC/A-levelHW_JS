@@ -3,32 +3,35 @@ let wrapperElem = document.querySelector("#wrapper");
 let bodyMassege = document.createElement("div");
 bodyMassege.style.cssText =
     "width: 500px; padding: 10px; background: #00FFFF; display: flex; align-items: center; flex-direction: column; color: white";
-bodyMassege.id = "bodyMassege";
 wrapperElem.appendChild(bodyMassege);
 
 let timer = true;
 
-let counter = countFu();
+let counter = makeCounter();
 
-function countFu () {
-    let i = 0;
+function makeCounter () {
+    let i = 1;
         return function () {
-            i++;
+            return i++;
         };
 };
-
-console.log(counter());
+function createSpanError (){
+    let spanElem = document.createElement("span");
+    spanElem.innerText = 'Chef, it is all gone !!!!';
+    bodyMassege.appendChild(spanElem);
+}
 
 let someGet = function () {
-    fetch("https://jsonplaceholder.typicode.com/posts/1")
+    let index = counter()
+    fetch(`https://jsonplaceholder.typicode.com/posts/${index}`)
         .then((response) => response.json())
         .then((json) => getMassegeElem(json))
         .catch((e) => {
+            createSpanError ()
             console.log('Error: ' + e.message);
-            console.log(e.response);
+            console.log(e.reject);
         });
 };
-someGet();
 
 function getMassegeElem(json) {
     console.log(json);
@@ -61,7 +64,11 @@ let somePost = function () {
         },
     })
         .then((response) => response.json())
-        .then((json) => console.log(json));
+        .then((json) => console.log(json))
+        .catch((e) => {
+            console.log('Error: ' + e.message);
+            console.log(e.response);
+        });
 };
 somePost();
 
@@ -80,7 +87,11 @@ let somePut = function () {
         },
     })
         .then((response) => response.json())
-        .then((json) => console.log(json));
+        .then((json) => console.log(json))
+        .catch((e) => {
+            console.log('Error: ' + e.message);
+            console.log(e.response);
+        });
 };
 somePut();
 
@@ -95,7 +106,11 @@ let somePatch = function () {
         },
     })
         .then((response) => response.json())
-        .then((json) => console.log(json));
+        .then((json) => console.log(json))
+        .catch((e) => {
+            console.log('Error: ' + e.message);
+            console.log(e.response);
+        });
 };
 somePatch();
 
@@ -103,6 +118,10 @@ let someDelete = function () {
     fetch('https://jsonplaceholder.typicode.com/posts/100', {
         method: 'DELETE',
     })
+    .catch((e) => {
+        console.log('Error: ' + e.message);
+        console.log(e.response);
+    });
 }
 someDelete()
 
